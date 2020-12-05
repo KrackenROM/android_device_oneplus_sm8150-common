@@ -20,10 +20,11 @@ $(call inherit-product-if-exists, vendor/oneplus/sm8150-common/sm8150-common-ven
 # Enable updating of APEXes
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
+KRACKEN_BUILDTYPE := ALPHA
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
-    $(LOCAL_PATH)/overlay-pa
+    $(LOCAL_PATH)/overlay-kracken
 
 PRODUCT_PACKAGES += \
     SM8150CommonFrameworkRes
@@ -96,7 +97,7 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    vendor.pa.biometrics.fingerprint.inscreen@1.0-service.oneplus_msmnile
+    vendor.kracken.biometrics.fingerprint.inscreen@1.0-service.oneplus_msmnile
 
 # Fstab
 ifneq ($(TARGET_USES_ONEPLUS_DYNAMIC_PARTITIONS),true)
@@ -133,9 +134,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libprotobuf-cpp-full-rtti
 
-# ParanoidDoze
-PRODUCT_PACKAGES += ParanoidDoze
-
 #Partitions
 ifeq ($(TARGET_USES_ONEPLUS_DYNAMIC_PARTITIONS),true)
 PRODUCT_BUILD_SUPER_PARTITION := false
@@ -149,7 +147,7 @@ PRODUCT_COPY_FILES += \
 
 # Permissions
 PRODUCT_COPY_FILES += \
-    vendor/pa/config/permissions/vendor.pa.biometrics.fingerprint.inscreen.xml:system/etc/permissions/vendor.pa.biometrics.fingerprint.inscreen.xml
+    vendor/kracken/config/permissions/vendor.kracken.biometrics.fingerprint.inscreen.xml:system/etc/permissions/vendor.kracken.biometrics.fingerprint.inscreen.xml
 
 # Power
 PRODUCT_PACKAGES += \
@@ -186,11 +184,9 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-impl \
     android.hardware.boot@1.0-service
 
-PRODUCT_STATIC_BOOT_CONTROL_HAL := \
+PRODUCT_PACKAGES += \
     bootctrl.msmnile \
-    libcutils \
-    librecovery_updater_msm \
-    libz \
+	bootctrl.msmnile.recovery
 
 PRODUCT_PACKAGES_DEBUG += \
     update_engine_client
@@ -202,4 +198,3 @@ PRODUCT_PACKAGES += \
 # WiFi
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_PRODUCT)/vendor_overlay/$(PRODUCT_TARGET_VNDK_VERSION)/etc/wifi/WCNSS_qcom_cfg.ini
-

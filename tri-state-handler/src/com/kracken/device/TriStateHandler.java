@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package co.aospa.device;
+package com.kracken.device;
 
 import android.content.Context;
 import android.media.AudioManager;

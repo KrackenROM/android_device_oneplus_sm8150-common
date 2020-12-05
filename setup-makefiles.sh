@@ -24,7 +24,7 @@ if [[ ! -d "${MY_DIR}" ]]; then MY_DIR="${PWD}"; fi
 
 ROOT="${MY_DIR}/../../.."
 
-HELPER="${ROOT}/vendor/pa/build/tools/extract_utils.sh"
+HELPER="${ROOT}/vendor/kracken/build/tools/extract_utils.sh"
 if [ ! -f "${HELPER}" ]; then
     echo "Unable to find helper script at ${HELPER}"
     exit 1
@@ -35,7 +35,7 @@ source "${HELPER}"
 setup_vendor "${DEVICE_COMMON}" "${VENDOR}" "${ROOT}" true
 
 # Copyright headers and guards
-write_headers "oneplus7 oneplus7t oneplus7pro oneplus7tpro"
+write_headers "oneplus7pro"
 
 # The standard common blobs
 write_makefiles "${MY_DIR}/proprietary-files.txt" true
